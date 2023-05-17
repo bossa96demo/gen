@@ -1,22 +1,21 @@
-# replacing semicolons with '\n' because it will be easier to work with
+# 1. replacing semicolons with '\n' because it will be easier to work with
+# 2. leaving only unique syllables
 cat 25K.txt | tr ';' '\n' \
-# $ cat out.txt | sort | wc -l
-# 62073
-# $ cat out.txt | sort | uniq | wc -l
-# 7436
 	| sort | uniq > last.txt
 
 vowel="[aeiou]"
 consonant="[bcdfghjklmnpqrstvwxyz]"
 sed -n "/^$consonant$vowel$/p" last.txt > simple.txt
 sed -n "/^$consonant$consonant$vowel$/p" last.txt >> simple.txt
-#sed -n "/^$consonant$vowel$consonant$p" last.txt >> simple.txt
 
-# removing all spaces from table
+# removing extra file
+rm last.txt
+
+# 1. removing all spaces from table
+# 2. removing all void '\n'-s and other stuff
+# 3. check if syllable starts with vowel, if so it is not real chinese pinyin syllable
+# 4. remove syllables containing ü because i don't like it 
 cat cn.txt | tr "\t" "\n" \
-# removing all void '\n'-s and other stuff
        	| awk "length > 1" \
-# check if syllable starts with vowel, if so it is not real chinese pinyin syllable
 	       	| awk '/^[^aeiouAEIOU]/' \
-# remove ü beacuse i don't like it 
 			| grep -v 'ü' > ch.txt
