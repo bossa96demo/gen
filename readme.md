@@ -2,8 +2,8 @@
 
 ### General Use
 - `./clean.sh` - this will parse databases and will give you 2 files:
-	1. `ch.txt`
-	2. `simple.txt`
+	- `ch.txt`
+	- `simple.txt`
 - `./gen.sh` - this will give you 4 nicknames that you can use later
 ### Databases of Syllables
 1. [25K.txt](https://github.com/gautesolheim/25000-syllabified-words-list)
