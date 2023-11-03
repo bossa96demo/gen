@@ -4,36 +4,36 @@
 if [ $# -gt 0 ]; then
 	file=$1
 else
-	read -p "file that contains syllable(ex. simple.txt): " file
+	read -p "File with blocks (ex. simple.txt): " file
+	read -p "How much blocks do you want? (ex. 4): " num
 fi
 
 # function to get random nickname
 gen_word(){
 
-	# define number of syllables in file
+	# define number of blocks in file
 	max=$(cat $file | wc -l)
 
-	# get random number from 1 to max number of syllables
-	rand0=$(( $RANDOM % $max + 1 ))
-	rand1=$(( $RANDOM % $max + 1 ))
-	rand2=$(( $RANDOM % $max + 1 ))
-	rand3=$(( $RANDOM % $max + 1 ))
-	# rand3=$(( $(od -An -N2 -i /dev/urandom | tr -d ' ') % $max + 1 ))
+	declare -a rnd_nums
+	declare -a answers
+	for i in $(seq 1 $num); do
+		#echo $i
+		# get random number from 1 to max number
+		rnd_nums[$i]=$(($RANDOM % $max + 1)) 
+		#echo "${rnd_nums[$i]}"
+		
+		# get random syllable from database
+		answers[$i]=$(sed -n "${rnd_nums[$i]} p" $file)
+		# write all blocks together 1 by 1 
+		echo -n "${answers[$i]}"
+	done
+	# rand0=$(( $(od -An -N2 -i /dev/urandom | tr -d ' ') % $max + 1 ))
 	# that will how be $RANDOM replaced in fish
-	
-	# get random syllable from database
-	ans0=$(sed -n "$rand0 p" $file)
-	ans1=$(sed -n "$rand1 p" $file)
-	ans2=$(sed -n "$rand2 p" $file)
-	ans3=$(sed -n "$rand3 p" $file)
-	
-	# join all these syllables together to make a nickname
-	echo -n $ans0-$ans1-$ans2-$ans3
 }
 
-# generate 4 so user will not need to run this again
-echo "Here are 4 probable nicknames: "
-echo "$(gen_word) $(gen_word)" 
-echo "$(gen_word) $(gen_word)" 
-echo "$(gen_word) $(gen_word)" 
-echo "$(gen_word) $(gen_word)" 
+# generate some so user will not need to run script again
+n=7
+echo "Here are $n probable nicknames: "
+for i in $(seq 1 $n); do 
+	echo "$(gen_word) $(gen_word)" 
+done
