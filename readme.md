@@ -5,7 +5,7 @@
 - `./gen.sh` - this will give you n nicknames that you can use later
 ### Databases of Syllables
 1. [25K.txt](https://github.com/gautesolheim/25000-syllabified-words-list)
-2. [cn.txt](https://yoyochinese.com/chinese-learning-tools/Mandarin-Chinese-pronunciation-lesson/pinyin-chart-table) it is a pinyin table
+2. [pinyin](https://yoyochinese.com/chinese-learning-tools/Mandarin-Chinese-pronunciation-lesson/pinyin-chart-table) it is a pinyin table
 ### Parsed Files
 - `chinese.txt` is a dataset of some pinyin syllables
 - `simple.txt` is a dataset of some english syllables
