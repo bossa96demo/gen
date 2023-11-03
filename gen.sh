@@ -25,7 +25,7 @@ gen_word(){
 		# get random syllable from database
 		answers[$i]=$(sed -n "${rnd_nums[$i]} p" $file)
 		# write all blocks together 1 by 1 
-		echo -n "${answers[$i]}"
+		echo -n "${answers[$i]} "
 	done
 	# rand0=$(( $(od -An -N2 -i /dev/urandom | tr -d ' ') % $max + 1 ))
 	# that will how be $RANDOM replaced in fish
